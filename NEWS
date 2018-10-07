@@ -1,0 +1,330 @@
+Overview of changes in lightdm-gtk-greeter 2.0.5
+
+    * General:
+      - Populated copyright information using bzr log
+    * Config changes:
+      - The ~power indicator is now displayed by default
+      - New "at-spi-enabled" configuration option to disable the at-spi-bus
+        after it has been enabled at build-time
+    * Appearance improvements:
+      - Added padding and additional classes for improved appearance with
+        Adwaita, Greybird, and other themes
+
+Overview of changes in lightdm-gtk-greeter 2.0.4
+
+    * New features:
+      - New cursor-theme-name and cursor-theme-size configuration keys
+    * Build changes:
+      - Finish port from gnome-common
+      - Moved more deprecated function calls to greeterdeprecated.c/.h
+    * Bugs fixed:
+      - Fixed autologin-session (LP: #1707186)
+      - Fixed accessibility with at-spi-bus on systemd and non-systemd
+        environments (LP: #1366534, #1670933)
+      - Fixed infinite flicker with multiple monitors (LP: #1410406, #1509780)
+
+Overview of changes in lightdm-gtk-greeter 2.0.3
+
+    * Build changes:
+      - gnome-common is no longer required or used
+      - Build errors with gcc-7 have been resolved
+    * Bugs fixed:
+      - Enabling Orca screen reader freezes the greeter (LP: #1483864)
+      - Scale user image to fit instead of expanding greeter window (LP: #1512963)
+      - Replace usage of deprecated GNOME macros (LP: #1599486, Debian: #829931)
+      - Disable Alt+F4 shutdown accelerator if power indicator is not present (LP: #1690129)
+      - Pre-fill logged in username when locked and hide-users is enabled (LP: #1701577)
+      - Reset xsession to default if selected user is not found (LP: #1701745)
+      - Missing break in switch (CID 1268326)
+      - Deference after null check (CID 1268327)
+    * Updated translations:
+      - Bosnian, Catalan, Czech, Danish, Galician, Kazakh
+
+Overview of changes in lightdm-gtk-greeter 2.0.2
+
+    * New features:
+      - Add support for lightdm 1.19.2+
+      - Include badge for Budgie desktop (LP: #1568494)
+    * Bugs fixed:
+      - Solid color instead of background image for some themes (LP: #1458330)
+      - Restore user background after changing display setup
+      - Correct login box blinking on login
+      - Replaced a number of build-breaking deprecations
+    * Updated translations
+
+Overview of changes in lightdm-gtk-greeter 2.0.1
+
+    * New features:
+      - "lightdm-gtk-greeter.conf.d" support (LP: #1421587)
+    * Bugs fixed:
+      - Multihead setup: black/white/grey screen at start - failed detection of mirrored mode
+        (LP: #1410406, #1426664, #1449567, #1448761)
+      - Switching active monitor with visible "onboard" window can leave this window in invalid state
+      - Onboard does not react to mouse clicks
+      - Losing focus after changing monitors configuration
+      - Every lock activates a new Virtual Terminal, see "changes" section (LP: #1445461)
+      - Broken delayed autologin (LP: #854261)
+      - Message label can remain hidden when it must be visible (GTK: #710888)
+    * Updated translations
+    * Required changes:
+      - For systems with Gtk 3.16 (LP: #1445461), add the following option to the configure command line:
+        --enable-kill-on-sigterm
+
+Overview of changes in lightdm-gtk-greeter 2.0.0
+
+    * New features:
+      - Background crossfades when changing users
+      - New one-window layout improves theming options
+      - New MATE and WindowMaker session icons
+      - Improved debugging with the allow-debugging configuration key
+    * Bugs fixed:
+      - lightdm-gtk-greeter leaves a11y (at-spi*) process behind (LP: #1366534)
+      - Indicator services restart after every resume (LP: #1377743)
+      - No indicators displayed when systemd-sysv is installed (LP: #1398619)
+    * Updated translations
+    * Required changes:
+      - Remove "--enable-indicator-services" from configure command line (now obsolete)
+      - For systems without "systemd-sysv", add the following line to the configure command line:
+        --enable-indicator-services-command="init --user --startup-event indicator-services-start"
+
+Overview of changes in lightdm-gtk-greeter 1.9.0
+
+    * Drop Gtk2 support
+
+Overview of changes in lightdm-gtk-greeter 1.8.6
+
+    * New features:
+      - Option to set monitor for displaying greeter windows: active-monitor
+      - Option to control usage of user's background: user-background (LP: #1306362)
+      - Panel layout now fully customizable
+      - New builtin indicator: ~layout (LP: #1240569)
+      - New accessibility menu item: screen reader (F4 hotkey) (experimental, LP: #1319848)
+      - Option to set initial state of accessibility tools: a11y-states (LP: #1319848)
+    * Bugs fixed:
+      - Handling laptop lid state (LP: #1273922)
+      - Lightdm greeter on dual monitor system has bad-sized background (LP: #1314603)
+      - Login screen wallaper doesn't fill screen (LP: #1325719)
+      - Use avatar set in config also without userlist (LP: #1317236)
+      - Don't use XInput2 to set the root cursor (LP: #1024482)
+      - Possible sigfault if sessions list is empty
+    * Additional fixes:
+      - Message "Failed to authenticate" do not overwrites the PAM error message now
+      - Do not display password entry if password is not required
+      - Passing all defined arguments to "onboard" in xembed mode
+      - Checking for libido version at build
+    * Updated translations
+    * Required configuration changes:
+      - host and clock labels are indicators now, new default panel layout:
+        indicators=~host;~spacer;~clock;~spacer;~session;~language;~a11y;~power
+      - You need to mark laptop monitor with "laptop=true" key in lightdm-gtk-greeter.conf
+        to enable lid state handling (see the included lightdm-gtk-greeter.conf
+        template)
+
+Overview of changes in lightdm-gtk-greeter 1.8.5
+
+    * Fix tooltips stealing focus (LP: #1307764)
+    * Fix get_session to not get corrupted (LP: #1311933)
+    * Fix "zoomed" implementation to correctly place the wallpaper.
+    * Updated translations
+
+Overview of changes in lightdm-gtk-greeter 1.8.4
+
+    * Really fix unclean exit (LP: #1290575)
+    * Updated translations
+
+Overview of changes in lightdm-gtk-greeter 1.8.3
+
+    * Fix unclean exit (LP: #1290575)
+    * Install sample-lightdm-gtk-greeter.css into doc
+    * Use the term "Guest Session" instead of "Guest Account"
+    * Updated translations
+
+Overview of changes in lightdm-gtk-greeter 1.8.2
+
+    * Deprecated "show-indicators" for "indicators", improves LTS upgrade path
+    * Bugs fixed:
+      - Fixed segfault on uninstalled session (fixes fedora: 1002782, LP: #1272910)
+      - Fixed CPU hogging with show-clock (fixes fedora: 1069963)
+      - Use the system language by default (fixes LP: #1276072)
+      - Greeter does not remember last session and language per user (LP: #1282139)
+      - segfault libglib (LP: #1272910)
+    * Additional fixes:
+      - Fixed panel resizing off screen with clock and accessibility
+      - Fixed centering of the clock
+      - Fixed initilization of clock, do not display "label"
+      - Fixed language and session selection for non-logged-in users
+      - Added mlockall to prevent password capturing methods
+      - Added badge for Pantheon session
+    * Updated translations
+
+Overview of changes in lightdm-gtk-greeter 1.8.1
+
+    * Bugs fixed:
+      - Fixed regression with enter not moving username entry to password entry.
+
+Overview of changes in lightdm-gtk-greeter 1.8.0
+
+    * New features:
+      - Configurable screensaver timeout when used as a lock screen (default
+        is 60 seconds)
+      - A warning is now displayed when attempting to shut down or restart
+        when other users are logged in.
+      - Improved support for multiple PAM messages.
+      - Improved theming support.
+      - Sample css file to make creating Gtk3 themes easier
+      - New keyboard shortcuts:
+        - Alt+F4 -- shut down dialog
+        - F9 -- session menu
+        - F10 -- language menu
+        - F11 -- accessibility menu
+        - F12 -- power menu
+    * Bugs fixed:
+      - The PAM message is now reset when the selected user is changed.
+      - The hint style for full in the configuration template is now correct
+        (hintfull).
+      - Fixed indicator loading with Ubuntu 14.04.
+      - Fixed ability to move top panel in gtk3.
+    * Required configuration changes (please read!):
+      - The "show-language-selector" key is no longer a valid setting, and has
+        been replaced by "show-indicators"
+      - The "show-indicators" setting now controls the display of all panel
+        controls. Either comment it out or remove it to get the default controls
+        (session, language, a11y, power), or define each individually (see the
+        included lightdm-gtk-greeter.conf template).
+
+Overview of changes in lightdm-gtk-greeter 1.7.1
+
+    * New features:
+      - border-radius property now themeable with CSS
+      - Widgets now support a themed alpha channel
+      - Sessions are now represented by a graphical badge
+      - Languages are now represented by a countrycode label
+    * Bugs fixed:
+      - LP #1266449: greeter crashes on empty username
+      - LP #1264563: switch-to-greeter does not set lock hint
+      - LP #1264771: Password entry box is not defined as invisible in glade definition
+      - LP #1267742: Screen artifacts appear after restart and cold boot
+      - LP #1270530: Login screen has boxes instead of text when font is not set
+    * Additional fixes:
+      - Improved username tooltips
+      - Fixed memory leak in clock feature
+      - Improved xscreensaver timeout functionality
+      - Login button is now the "default" widget
+      - Windows can no longer be positioned off-screen
+
+Overview of changes in lightdm-gtk-greeter 1.7.0
+
+    * New features:
+      - Window positioning (relative or absolute) of the login window and
+        power dialogs is now configurable in lightdm-gtk-greeter.conf
+      - The default user image is now configurable in lightdm-gtk-greeter.conf
+    * Accessibility improvements:
+      - Onboard on-screen keyboard is now run in xembed mode
+      - Addition of F1, F2, F3 hotkeys for accessibility menu items
+      - Users can now be switched from the username/password entries with
+        up/down
+      - Restart/Power Off dialogs can now be cancelled with the Escape key
+    * Improvements when used as a Lock Screen:
+      - The screen is now blanked when locked and the greeter is started
+    * Background loading improvements:
+      - The background image is now loaded only once
+      - Memory leaks from pixmaps and X clients have been fixed
+    * Bugs fixed:
+      - Debian #718497: Last PAM error message not showing
+      - Debian #721510: Greeter panel clock fails with long date formats
+      - LP #1031421: Greeter doesn't select user's last session when using
+        "Other"
+      - LP #1147914: Can't change the login window's position
+      - LP #1191509: Disabling language selector leaves strange artifact on
+        the screen
+      - LP #1194694: move to password input if <enter> pressed after username input
+      - LP #1231134: support enter key to validate login entry
+      - LP #1232804: Improve "login greeter -> desktop" transition in Xubuntu
+      - LP #1251431: user background gets painted over background specified in
+        config file
+    * Additional fixes:
+      - Fixed typo in language selection
+      - Fixed keyboard-focus with on-screen keyboard
+    * Many thanks to our contributors for this release,
+      Alistair Buxton and Andrew P. who provided the majority of the patches and
+      functionality.
+
+Overview of changes in lightdm-gtk-greeter 1.6.1
+
+    * Fix inability to change session/languages on logout (lp: #1213837)
+
+Overview of changes in lightdm-gtk-greeter 1.6.0
+
+    * Selected username displayed in tooltip for combobox
+    * Use GtkInfoBar for PAM authentication messages
+
+Overview of changes in lightdm-gtk-greeter 1.5.2
+
+    * Use HighContrast for accessibility as HighContrastInverse has been dropped
+      upstream.
+    * Reintroduce gtk2 support (choose at configure time).
+    * Add support for loading the user-avatar.
+    * Fix background-display when picture has no alpha channel (LP: #1086199).
+    * Compile-in the ui file to avoid crashes when it's not present or too old.
+    * Add libindicator support (configure flag and whitelist in the config file).
+    * Move session-selector to the tray area
+    * Interface update for login-window and shutdown/restart dialogs
+    * Use symbolic icons for gtk3, standard icons for gtk2
+    * Use "zoom" scaling for wallpaper instead of "fit" scaling
+    * Add on-screen keyboard to a11y
+    * Addition of clock widget
+
+Overview of changes in lightdm-gtk-greeter 1.5.0
+
+    * Use new api for autologin.
+    * Add support for loading user background from Accountsservice.
+
+Overview of changes in lightdm-gtk-greeter 1.3.1
+
+    * Clean up DISTCLEANFILES to fix FTBFS-twice-in-a-row
+    * Drop custom icons now that there's a config option for the icon theme
+    * Rename the 'Login' button to 'Unlock' when the user is already logged in
+    * Don't hide the login box when cancel is pressed, instead refresh the
+      prompt box to show the correct username prompt
+    * Hide the Cancel button, useless with the userlist combobox
+
+Overview of changes in lightdm-gtk-greeter 1.3.0
+
+    * Properly center the login window after a resize
+    * Add names to widgets to ease theming
+    * Replace the userlist's treeview with a combobox
+    * Document the option to show the language chooser
+    * Add a config option to set the path to the logo image
+    * Add a config option to set the icon theme
+    * Use a known icon name for the accessibility menu
+    * Remember the last session used
+    * Update po/LINGUAS.
+
+Overview of changes in lightdm-gtk-greeter 1.1.6
+
+    * Fix 'Large Font' option for fontnames containing spaces (Bug #908926)
+    * Fix 'Cancel' button action, and clear the error label (Bug #990315)
+    * Add missing include for setlocale (Bug #999438)
+    * Updated translations.
+
+Overview of changes in lightdm-gtk-greeter 1.1.5
+
+    * Restore all translations lost during the split from lightdm
+
+Overview of changes in lightdm-gtk-greeter 1.1.4
+
+    * Load greeter configuration from correct directory
+
+Overview of changes in lightdm-gtk-greeter 1.1.3
+
+    * Fix greeter looking for data in the wrong directory
+
+Overview of changes in lightdm-gtk-greeter 1.1.2
+
+    * Correctly link against libX11
+    * Remove deprecated GTK+ functions
+
+Overview of changes in lightdm-gtk-greeter 1.1.1
+
+    * Split out of lightdm source
+    * Translate login prompts using the translations from PAM

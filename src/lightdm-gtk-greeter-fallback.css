@@ -1,0 +1,17 @@
+#layout_menuitem>GtkLabel
+{
+    border: 1px solid alpha(@menu_fg_color, 0.8);
+    border-radius: 0.5em;
+    padding: 0px 0.25em;
+    background: alpha(@menu_fg_color, 0.2);
+}
+
+#layout_menuitem
+{
+    padding: 1px;
+}
+
+/* Make sure the GtkSeparatorMenuItems don't alter the overall panel/menubar background */
+#panel_window menubar > separator { background: transparent; }
+/* Workaround for Adwaita - and other themes - setting a smaller font for the keycap window */
+#login_window.keycap, #power_window.keycap { font-size: initial; }
