@@ -1,4 +1,4 @@
-# ArcoLinux Lightdm Gtk Greeter
+
 
 
 
